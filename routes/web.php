@@ -1,17 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CalculatorController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,3 +18,11 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+// Ruta para el formulario de contacto
+Route::view('/contact', 'contact')->name('contact');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
+// Ruta para la calculadora
+Route::view('/calculator', 'calculator')->name('calculator');
+Route::post('/calculate', [CalculatorController::class, 'calculate'])->name('calculate');
